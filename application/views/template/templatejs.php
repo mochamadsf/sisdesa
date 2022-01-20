@@ -35,3 +35,5 @@
 <script src="<?php echo base_url() ?>template/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/js/multi-form.js?v2"></script>
 <script src="<?php echo base_url()?>assets/js/jquery.validate.min.js"></script>	
+<!-- sweetalert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
