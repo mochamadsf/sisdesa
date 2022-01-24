@@ -93,7 +93,7 @@
                 </div>
                 <div class="modal-body">
 
-                  <form id="myForm" action="#" method="POST">
+                  <form id="myForm" action="<?php echo base_url().'penduduk/datapenduduk/simpanData'; ?>" method="POST">
                     <!-- <h1>Registration Form</h1> -->
                     <!-- One "tab" for each step in the form: -->
                     <div class="tab">
@@ -176,7 +176,7 @@
                     <!-- text input -->
                     <div class="form-group">
                       <label>Pendidikan Terakhir</label>
-                      <select class=" form-control-sm form-control" name="pendidikan_terakhir" >
+                      <select class=" form-control-sm form-control" name="pendidikan_terakhir" id="pendidikan_terakhir">
                         <option>Pilih..</option>
                         <option value="Tidak Sekolah">Tidak Sekolah</option>
                         <option value="SD">SD</option>
@@ -234,7 +234,6 @@
               <div class="tab">
                 <div class="row"> 
                   <div class="col-md-12 d-flex justify-content-end">
-                    <!-- <button type="button" class="btn btn-danger btn-sm"> Tambah Data Hub. Keluarga</button> -->
 										<div class="btn-group btn-warning mb-2">
 											<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 												Tambah Data Hub. Keluarga
@@ -246,27 +245,21 @@
 											</div>
 										</div>
                   </div> 
-									<!-- <input type="text" class="form-control-sm form-control jk" placeholder="Enter ..." name="jenis_kel" id="jenis_kel">  -->
                 </div>
 								<div id="formHubKel">
+									<input type="text" class="form-control-sm form-control" name="jenis_hub_hk[]" value="Istri" hidden>
 									<div class="row">
 										<div class="col-sm-6">
 											<!-- text input -->
 											<div class="form-group">
 												<label>Nama Istri</label>
-												<input type="text" class="form-control-sm form-control" name="nama_hk[]" placeholder="Enter ...">
+												<input type="text" class="form-control-sm form-control" name="nama_hk[]" placeholder="Nama Istri">
 											</div>
 										</div>
-										<div class="col-sm-3">
+										<div class="col-sm-6">
 											<div class="form-group">
 												<label>NIK</label>
-												<input type="text" class="form-control-sm form-control" name="nik_hk[]" placeholder="Enter ..." >
-											</div>
-										</div>
-										<div class="col-sm-3">
-											<div class="form-group">
-												<label>Hub. Keluarga</label>
-												<input type="text" class="form-control-sm form-control" name="hub_kel_hk[]" placeholder="Enter ..." >
+												<input type="text" class="form-control-sm form-control" name="nik_hk[]" placeholder="No Induk Kependudukan">
 											</div>
 										</div>
 									</div>
@@ -275,14 +268,14 @@
 											<!-- text input -->
 											<div class="form-group">
 												<label>Tempat Lahir</label>
-												<input type="text" class="form-control-sm form-control" name="tempat_lahir_hk[]" placeholder="Enter ...">
+												<input type="text" class="form-control-sm form-control" name="tempat_lahir_hk[]" placeholder="Contoh : Garut">
 											</div>
 										</div>
 										<div class="col-sm-3">
 											<label>Tanggal Lahir</label>
 											<div class="form-group ">
-												<div class="input-group date datetimepicker2" id="datetimepicker2" data-target-input="nearest">
-													<input type="text" class="form-control-sm form-control datetimepicker-input" name="tanggal_lahir_hk[]" data-inputmask="'alias': 'datetime'" data-target=".datetimepicker2"/>
+												<div class="input-group date datetimepicker3" id="datetimepicker3" data-target-input="nearest">
+													<input type="text" class="form-control-sm form-control datetimepicker-input" name="tanggal_lahir_hk[]" placeholder="dd/mm/yyyy" data-target=".datetimepicker3"/>
 													<div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
 														<div class="input-group-text"><i class="fa fa-calendar"></i></div>
 													</div>
@@ -303,12 +296,12 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-sm-6">
+										<div class="col-sm-3">
 											<!-- text input -->
 											<div class="form-group">
 												<label>Pendidikan Terakhir</label>
-												<!-- <input type="text" class="form-control-sm form-control" name="pendidikan_terakhir_hk[]" placeholder="Enter ..."> -->
-												<select class=" form-control-sm form-control" name="pendidikan_terakhir_hk[]" >
+												<!-- <input type="text" class="form-control-sm form-control" name="pend_terakhir_hk[]" placeholder="Enter ..."> -->
+												<select class=" form-control-sm form-control" name="pend_terakhir_hk[]" >
 													<option>Pilih..</option>
 													<option value="Tidak Sekolah">Tidak Sekolah</option>
 													<option value="SD">SD</option>
@@ -324,9 +317,14 @@
 											</div>
 										</div>
 										<div class="col-sm-3">
+											<div class=" form-group ">
+												<label>Agama</label>
+												<input type="text" class="form-control-sm form-control" placeholder="Contoh : Islam" name="agama_hk[]">
+											</div>
+										</div>
+										<div class="col-sm-3">
 											<div class="form-group">
 												<label>Pekerjaan</label>
-												<input type="text" class="form-control-sm form-control" name="pekerjaan_hk[]" placeholder="Enter ..." >
 												<select class=" form-control-sm form-control" name="pekerjaan_hk[]" id="pekerjaan" >
 													<option>Pilih..</option>
 													<option value="Tidak Bekerja">Tidak Bekerja</option>
@@ -350,7 +348,13 @@
 										<div class="col-sm-3">
 											<div class="form-group">
 												<label>Telp. (Whatsapp)</label>
-												<input type="text"  class="form-control-sm form-control" name="telp_hk[]" placeholder="Enter ..." >
+												<input type="text" inputmode="text" class="form-control-sm form-control" name="telp_hk[]" placeholder="Contoh : 081224207149">
+											</div>
+										</div>
+										<div class="col-sm-3" hidden>
+											<div class="form-group">
+												<label>Akta kelahiran</label>
+												<input type="text" class="form-control-sm form-control" name="akta_kelahiran_hk[]">
 											</div>
 										</div>
 									</div>
@@ -870,23 +874,23 @@ $("#rw").inputmask({"mask": "99"});
 			var maksFormAnak = 4;
 
 			btndataistri = document.getElementById('dropdownJenHubKel').addEventListener('click', function (event) {
-									
-				let labelIstri = '<input type="text" class="form-control-sm form-control" placeholder="Enter ..." name="jenis_kel" id="jenis_kel" value="Istri" hidden><hr><div class="row"><div class="col-sm-6"><!-- text input --><div class="form-group"><label>Nama Istri</label>';
-				let labelAnak = '<input type="text" class="form-control-sm form-control" placeholder="Enter ..." name="jenis_kel" id="jenis_kel" value="Anak" hidden><hr><div class="row"><div class="col-sm-6"><!-- text input --><div class="form-group"><label>Nama Anak</label>';
-				let labelKl = '<input type="text" class="form-control-sm form-control" placeholder="Enter ..." name="jenis_kel" id="jenis_kel" value="Keluarga Lain" hidden><hr><div class="row"><div class="col-sm-6"><!-- text input --><div class="form-group"><label>Nama Keluarga Lain</label>';
-				let form1 = '<input type="text" class="form-control-sm form-control" placeholder="Enter ..."></div></div><div class="col-sm-3"><div class="form-group"><label>NIK</label><input type="text" class="form-control-sm form-control" placeholder="Enter ..." ></div></div><div class="col-sm-3"><div class="form-group"><label>Hub.Keluarga</label><input type="text" class="form-control-sm form-control" placeholder="Enter ..." ></div></div></div><div class="row"><div class="col-sm-6"><!-- text input --><div class="form-group"><label>Tempat Lahir</label><input type="text" class="form-control-sm form-control" placeholder="Enter ..."></div></div><div class="col-sm-3"><label>Tanggal Lahir</label><div class="form-group "><div class="input-group date datetimepicker2" id="datetimepicker2" data-target-input="nearest"><input type="text" class="form-control-sm form-control datetimepicker-input" data-inputmask="\'alias\': \'datetime\'" data-target=".datetimepicker2"/>';
-				let form2 = '<div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker"><div class="input-group-text"><i class="fa fa-calendar"></i></div></div></div></div></div><div class="col-sm-3"><div class="form-group "><label>Golongan Darah</label><select class="form-control-sm form-control"><option>Pilih Golongan Darah</option><option>A</option><option>B</option><option>O</option><option>AB</option></select></div></div></div><div class="row"><div class="col-sm-3"><!-- text input --><div class="form-group"><label>Pendidikan Terakhir</label><select class=" form-control-sm form-control" name="pendidikan_terakhir" ><option>Pilih..</option><option value="Tidak Sekolah">Tidak Sekolah</option><option value="SD">SD</option><option value="SMP/Sederajat">SMP/Sederajat</option><option value="SMA/Sederajat">SMA/Sederajat</option><option value="D1">D1</option><option value="D2">D2</option><option value="D3">D3</option><option value="S1">S1</option>';
-				let form3 = '<option value="S2">S2</option><option value="S3">S3</option></select></div></div><div class="col-sm-3"><div class="form-group"><label>Pekerjaan</label><select class=" form-control-sm form-control" name="pekerjaan_hk[]" id="pekerjaan" ><option>Pilih..</option><option value="Tidak Bekerja">Tidak Bekerja</option><option value="PNS">PNS</option><option value="TNI/POLRI">TNI/POLRI</option><option value="Pensiunan">Pensiunan</option><option value="Karyawan Swasta">Karyawan Swasta</option><option value="Wiraswasta">Wiraswasta</option><option value="Petani">Petani</option><option value="Sopir">Sopir</option><option value="Buruh Harian Lepas">Buruh Harian Lepas</option><option value="Buruh Tani">Buruh Tani</option><option value="Tukang Banguna">Tukang Banguna</option><option value="Pedagang">Pedagang</option><option value="Pelajar">Pelajar</option><option value="Ibu Rumah tangga">Ibu Rumah tangga</option><option value="Lain-lain">Lain-lain</option></select></div></div>';
-				let form4 = '<div class="col-sm-3"><div class="form-group"><label>Tlp.WA</label><input type="text"  class="form-control-sm form-control" placeholder="Enter ..." ></div></div><div class="col-sm-3"><div class="form-group"><label>Akta Kelahiran</label><select class="form-control-sm form-control"><option>Ada</option><option>Tidak</option></select></div>';
-				let form3istri = '<div class="row"><div class="col-sm-6"><!-- text input --><div class="form-group"><label>Pendidikan Terakhir</label><select class=" form-control-sm form-control" name="pendidikan_terakhir" ><option>Pilih..</option><option value="Tidak Sekolah">Tidak Sekolah</option><option value="SD">SD</option><option value="SMP/Sederajat">SMP/Sederajat</option><option value="SMA/Sederajat">SMA/Sederajat</option><option value="D1">D1</option><option value="D2">D2</option><option value="D3">D3</option><option value="S1">S1</option><option value="S2">S2</option><option value="S3">S3</option></select></div></div><div class="col-sm-3"><div class="form-group"><label>Pekerjaan</label><input type="text" class="form-control-sm form-control" placeholder="Enter ..." ></div></div><div class="col-sm-3"><div class="form-group"><label>Tlp.WA</label><input type="text"  class="form-control-sm form-control" placeholder="Enter ..." ></div></div></div>';
-				let target = event.target;
-
+				var labelIstri = '<input type="text" class="form-control-sm form-control" id="jenis_hub_hk" name="jenis_hub_hk[]" value="Istri" hidden></div><hr><div class="row"><div class="col-sm-6"><!-- text input --><div class="form-group"><label>Nama Istri</label><input type="text" class="form-control-sm form-control" placeholder="Nama Istri" name="nama_hk[]"></div>';
+				var labelAnak = '<input type="text" class="form-control-sm form-control" id="jenis_hub_hk" name="jenis_hub_hk[]" value="Anak" hidden></div><hr><div class="row"><div class="col-sm-6"><!-- text input --><div class="form-group"><label>Nama Anak</label><input type="text" class="form-control-sm form-control" placeholder="Nama Anak" name="nama_hk[]"></div>';
+				var labelKl = '<input type="text" class="form-control-sm form-control" id="jenis_hub_hk" name="jenis_hub_hk[]" value="Keluarga Lain" hidden></div><hr><div class="row"><div class="col-sm-6"><!-- text input --><div class="form-group"><label>Nama Keluarga Lain</label><input type="text" class="form-control-sm form-control" placeholder="Nama Keluarga Lain" name="nama_hk[]"></div>';
+				var form1 = '</div><div class="col-sm-6"><div class="form-group"><label>NIK</label><input type="text" class="form-control-sm form-control" placeholder="No Induk Kependudukan" name="nik_hk[]" data-inputmask="\'mask\': \'9999 9999 9999 9999\'"></div></div><div class="col-sm-3"></div></div><div class="row"><div class="col-sm-6"><!-- text input --><div class="form-group"><label>Tempat Lahir</label><input type="text" class="form-control-sm form-control" name="tempat_lahir_hk[]" placeholder="Contoh: Garut"></div></div><div class="col-sm-3"><label>Tanggal Lahir</label><div class="form-group">';
+				var form2 = '<div class="input-group date datetimepicker3" id="datetimepicker3" data-target-input="nearest"><input type="text" class="form-control-sm form-control datetimepicker-input" name="tanggal_lahir_hk[]" placeholder="dd/mm/yyyy" data-inputmask="\'alias\': \'datetime\'" data-target=".datetimepicker3"/><div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker"><div class="input-group-text"><i class="fa fa-calendar"></i></div></div></div></div></div><div class="col-sm-3"><div class="form-group "><label>Golongan Darah</label><select class="form-control-sm form-control" name="gol_darah_hk[]"><option>Pilih Golongan Darah</option><option>A</option><option>B</option><option>O</option><option>AB</option></select></div></div></div>';
+				var form3 = '<div class="row"><div class="col-sm-3"><!-- text input --><div class="form-group"><label>Pendidikan Terakhir</label><select class=" form-control-sm form-control" name="pend_terakhir_hk[]" ><option>Pilih..</option><option value="Tidak Sekolah">Tidak Sekolah</option><option value="SD">SD</option><option value="SMP/Sederajat">SMP/Sederajat</option><option value="SMA/Sederajat">SMA/Sederajat</option><option value="D1">D1</option><option value="D2">D2</option><option value="D3">D3</option><option value="S1">S1</option><option value="S2">S2</option><option value="S3">S3</option></select></div></div><div class="col-sm-3"><div class="form-group"><label>Pekerjaan</label><select class=" form-control-sm form-control" name="pekerjaan_hk[]" id="pekerjaan" ><option>Pilih..</option><option value="Tidak Bekerja">Tidak Bekerja</option><option value="PNS">PNS</option><option value="TNI/POLRI">TNI/POLRI</option><option value="Pensiunan">Pensiunan</option>';
+				var form4 = '<option value="Karyawan Swasta">Karyawan Swasta</option><option value="Wiraswasta">Wiraswasta</option><option value="Petani">Petani</option><option value="Sopir">Sopir</option><option value="Buruh Harian Lepas">Buruh Harian Lepas</option><option value="Buruh Tani">Buruh Tani</option><option value="Tukang Banguna">Tukang Banguna</option><option value="Pedagang">Pedagang</option><option value="Pelajar">Pelajar</option><option value="Ibu Rumah tangga">Ibu Rumah tangga</option><option value="Lain-lain">Lain-lain</option></select></div></div><div class="col-sm-3"><div class="form-group"><label>Telp. (WA)</label><input type="text"  class="form-control-sm form-control" name="telp_hk[]" placeholder="Enter ..." ></div></div><div class="col-sm-3"><div class="form-group"><label>Akta Kelahiran</label><select class="form-control-sm form-control"><option>Ada</option><option>Tidak</option></select></div>';
+				var form3istri = '<div class="row"><div class="col-sm-6"><!-- text input --><div class="form-group"><label>Pendidikan Terakhir</label><select class=" form-control-sm form-control" name="pend_terakhir[]" ><option>Pilih..</option><option value="Tidak Sekolah">Tidak Sekolah</option><option value="SD">SD</option><option value="SMP/Sederajat">SMP/Sederajat</option><option value="SMA/Sederajat">SMA/Sederajat</option><option value="D1">D1</option><option value="D2">D2</option><option value="D3">D3</option><option value="S1">S1</option><option value="S2">S2</option><option value="S3">S3</option></select></div></div><div class="col-sm-3"><div class="form-group"><label>Pekerjaan</label><select class=" form-control-sm form-control" name="pekerjaan_hk[]" id="pekerjaan" ><option>Pilih..</option><option value="Tidak Bekerja">Tidak Bekerja</option><option value="PNS">PNS</option>';
+				var form3istri1 = '<option value="TNI/POLRI">TNI/POLRI</option><option value="Pensiunan">Pensiunan</option><option value="Karyawan Swasta">Karyawan Swasta</option><option value="Wiraswasta">Wiraswasta</option><option value="Petani">Petani</option><option value="Sopir">Sopir</option><option value="Buruh Harian Lepas">Buruh Harian Lepas</option><option value="Buruh Tani">Buruh Tani</option><option value="Tukang Banguna">Tukang Banguna</option><option value="Pedagang">Pedagang</option><option value="Pelajar">Pelajar</option><option value="Ibu Rumah tangga">Ibu Rumah tangga</option><option value="Lain-lain">Lain-lain</option></select></div></div><div class="col-sm-3"><div class="form-group"><label>Telp. WA</label><input type="text" class="form-control-sm form-control" placeholder="Enter ..." ></div></div></div>';
+				var target = event.target;
+				
 				if (target.id === 'addDataIstri') {
 					if(x1 < maksFormIstri_Kl){
 						x1++;
-						document.getElementById('formHubKel').innerHTML += labelIstri + form1 + form2 + form3istri;
+						// document.getElementById('formHubKel').innerHTML += labelIstri + form1 + form2 + form3istri;</div>
+						$('#formHubKel').append(labelIstri + form1 + form2 + form3istri + form3istri1);
 					} else {
-						// alert('Maaf telah mencapai batas input data hubungan keluarga (Istri)');
 						Swal.fire(
 							'Perhatian!',
 							'Maaf telah mencapai batas input data hubungan keluarga <strong>(Istri)</strong>',
@@ -896,9 +900,8 @@ $("#rw").inputmask({"mask": "99"});
 				} else if (target.id === 'addDataAnak') {
 					if(x2 < maksFormAnak){
 						x2++;
-						document.getElementById('formHubKel').innerHTML += labelAnak + form1 + form2 + form3 + form4;
+						$('formHubKel').append(labelAnak + form1 + form2 + form3 + form4);
 					} else {
-						// alert('Maaf telah mencapai batas input data hubungan keluarga (Istri)');
 						Swal.fire(
 							'Perhatian!',
 							'Maaf telah mencapai batas input data hubungan keluarga <strong>(Anak)</strong>',
@@ -908,9 +911,8 @@ $("#rw").inputmask({"mask": "99"});
 				} else {
 					if(x3 < maksFormIstri_Kl){
 						x3++;
-						document.getElementById('formHubKel').innerHTML += labelKl + form1 + form2 + form3 + form4;
+						$('formHubKel').append(labelKl + form1 + form2 + form3 + form4);
 					} else {
-						// alert('Maaf telah mencapai batas input data hubungan keluarga (Istri)');
 						Swal.fire(
 							'Perhatian!',
 							'Maaf telah mencapai batas input data hubungan keluarga <strong>(Keluarga Lain)</strong>',
@@ -1065,6 +1067,9 @@ $("#rw").inputmask({"mask": "99"});
       format: 'L'
     });
 
+		$('#datetimepicker3').datetimepicker({
+      format: 'L'
+    });
    })
  </script>
 </body>
